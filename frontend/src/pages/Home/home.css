@@ -1,0 +1,164 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #141414;
+  }
+  
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Hero Section */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    background-color: #000;
+    overflow: hidden;
+  }
+  
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mask-image: linear-gradient(to bottom, transparent, black 80%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 80%);
+  }
+  
+  .hero-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 5%;
+    z-index: 2;
+    max-width: 600px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .hero-caption p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #ddd;
+  }
+  
+  .hero-btns {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .hero-btns .btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .hero-btns .btn img {
+    width: 20px;
+  }
+  
+  .hero-btns .btn:hover {
+    background-color: #e50914;
+    color: #fff;
+  }
+  
+  .hero-btns .btn.dark-btn {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .hero-btns .btn.dark-btn:hover {
+    background-color: #444;
+  }
+  
+  /* More Cards Section */
+  .more-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  .card {
+    background-color: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .video-card {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .card p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #fff;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero {
+      height: 50vh;
+    }
+  
+    .hero-caption {
+      bottom: 10px;
+      left: 3%;
+    }
+  
+    .title {
+      font-size: 2.5rem;
+    }
+  
+    .hero-caption p {
+      font-size: 0.9rem;
+    }
+  
+    .hero-btns .btn {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+  
+    .more-cards {
+      gap: 10px;
+    }
+  
+    .card {
+      width: 90%;
+    }
+  
+    .video-card {
+      height: 120px;
+    }
+  }
+  
