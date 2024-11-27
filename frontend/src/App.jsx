@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/login';
 import Register from './pages/Register/register';
 import Home from './pages/Home/home';
@@ -6,18 +6,20 @@ import Home from './pages/Home/home';
 function App() {
   return (
     <div>
-    <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        {/* Redirect the root ("/") to "/login" */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>
-    </Router>
     </div>
   );
 }
 
 export default App;
+
+
 
 
 // import React from 'react'
