@@ -4,19 +4,23 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 3001;
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); // Enable CORS
+app.use(bodyParser.json()); // Parse incoming JSON requests
+
+// Serve static video files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Ensure videos are served from 'uploads' folder
 
 // Database Connection
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '', // Replace with your MySQL root password
-  database: 'video_app', // Adjust to the correct database for videos if needed
+  database: 'video_app',
 });
 
 // Connect to MySQL
@@ -28,15 +32,13 @@ db.connect((err) => {
   }
 });
 
-// **Authentication Endpoints**
-
-// Register Endpoint
+// Authentication Endpoints
 app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const query = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-  db.query(query, [name, email, hashedPassword], (err, result) => {
+  db.query(query, [name, email, hashedPassword], (err) => {
     if (err) {
       console.error(err);
       res.status(500).send('Error registering user');
@@ -46,7 +48,6 @@ app.post('/register', async (req, res) => {
   });
 });
 
-// Login Endpoint
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -71,20 +72,24 @@ app.post('/login', (req, res) => {
   });
 });
 
-
-// **Video Fetch Endpoint**
-
-// Get Videos Endpoint
+// Video Fetch Endpoint
+// Video Fetch Endpoint
 app.get('/api/videos', (req, res) => {
   db.query('SELECT * FROM videos', (err, results) => {
     if (err) {
       console.error(err);
       res.status(500).send('Error fetching videos');
     } else {
-      res.json(results);
+      // Assuming the 'video_link' column stores just the filename (e.g., 'video1.mp4')
+      const videos = results.map(video => ({
+        ...video,
+        video_link: `http://localhost:${port}/uploads/${video.video_link}`, // Construct the full video URL
+      }));
+      res.json(videos); // Send the videos with the correct video link
     }
   });
 });
+
 
 // Start the server
 app.listen(port, () => {

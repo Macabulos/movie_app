@@ -1,28 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import './home.css';
 import Navbar from '../../components/Navbar/navbar';
-import play_icon from '../../assets/play_icon.png';
-import info_icon from '../../assets/info_icon.png';
 import Footer from '../../components/Footer/footer';
 
 const Home = () => {
   const [videos, setVideos] = useState([]); // State to store video data
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
 
-  // Fetch video data from the backend
   useEffect(() => {
-    fetch('http://localhost:3001/api/videos') // URL of the backend API
+    // Fetch videos from backend API
+    fetch('http://localhost:3001/api/videos') // Ensure backend is running
       .then((response) => response.json())
-      .then((data) => setVideos(data))
+      .then((data) => {
+        console.log('Videos fetched:', data); // Debug to verify response
+        setVideos(data);
+      })
       .catch((error) => console.error('Error fetching videos:', error));
   }, []);
+
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
     <div className="home">
       <Navbar />
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <ul className="sidebar-menu">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/categories">Categories</a></li>
+          <li><a href="/favorites">Favorites</a></li>
+          <li><a href="/profile">Profile</a></li>
+        </ul>
+      </div>
+
+      <button className="hamburger" onClick={toggleSidebar}>☰</button>
+
       <div className="hero">
         {videos.length > 0 ? (
           <>
-            {/* Display the first video as the main video */}
             <video
               src={videos[0].video_link}
               controls
@@ -34,16 +48,6 @@ const Home = () => {
             <div className="hero-caption">
               <h1 className="title">{videos[0].name}</h1>
               <p>{videos[0].description}</p>
-              <div className="hero-btns">
-                <button className="btn">
-                  <img src={play_icon} alt="" />
-                  Play
-                </button>
-                <button className="btn dark-btn">
-                  <img src={info_icon} alt="" />
-                  More Info
-                </button>
-              </div>
             </div>
           </>
         ) : (
@@ -51,7 +55,6 @@ const Home = () => {
         )}
       </div>
 
-      {/* Display additional videos */}
       <div className="more-cards">
         {videos.slice(1).map((video, index) => (
           <div className="card" key={index}>
