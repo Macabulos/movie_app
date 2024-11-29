@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/footer';
 const Home = () => {
   const [videos, setVideos] = useState([]); // State to store video data
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
+  const [heroVideo, setHeroVideo] = useState(null); // State for currently displayed hero video
 
   useEffect(() => {
     // Fetch videos from backend API
@@ -14,11 +15,16 @@ const Home = () => {
       .then((data) => {
         console.log('Videos fetched:', data); // Debug to verify response
         setVideos(data);
+        setHeroVideo(data[0]); // Set the first video as the default hero video
       })
       .catch((error) => console.error('Error fetching videos:', error));
   }, []);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+
+  const handleVideoClick = (video) => {
+    setHeroVideo(video); // Update the hero video with the clicked video
+  };
 
   return (
     <div className="home">
@@ -35,10 +41,10 @@ const Home = () => {
       <button className="hamburger" onClick={toggleSidebar}>☰</button>
 
       <div className="hero">
-        {videos.length > 0 ? (
+        {heroVideo ? (
           <>
             <video
-              src={videos[0].video_link}
+              src={heroVideo.video_link}
               controls
               autoPlay
               muted
@@ -46,8 +52,8 @@ const Home = () => {
               className="hero-video"
             />
             <div className="hero-caption">
-              <h1 className="title">{videos[0].name}</h1>
-              <p>{videos[0].description}</p>
+              <h1 className="title">{heroVideo.title || 'Untitled'}</h1>
+              <p>{heroVideo.release_date || 'No release date available.'}</p>
             </div>
           </>
         ) : (
@@ -56,8 +62,12 @@ const Home = () => {
       </div>
 
       <div className="more-cards">
-        {videos.slice(1).map((video, index) => (
-          <div className="card" key={index}>
+        {videos.map((video, index) => (
+          <div
+            className="card"
+            key={index}
+            onClick={() => handleVideoClick(video)} // Set the clicked video as the hero video
+          >
             <video
               src={video.video_link}
               controls
@@ -65,7 +75,8 @@ const Home = () => {
               muted
               loop
             />
-            <p>{video.name}</p>
+            <h3>{video.title}</h3>
+            <p>{video.release_date}</p> {/* Display only the release date */}
           </div>
         ))}
       </div>

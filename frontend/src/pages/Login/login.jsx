@@ -22,13 +22,12 @@ const Login = () => {
 
       if (response.ok) {
         alert('Login successful');
-        navigate('/home'); // Correct route to homepage
+        navigate('/home'); // Navigate to homepage
       } else {
         alert(data.message || 'Login failed');
       }
     } catch (error) {
       console.error('Error:', error);
-      res.status(500).send('Error logging in');
     }
   };
 
@@ -41,7 +40,9 @@ const Login = () => {
           <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
           <button type="submit">Login</button>
           <div className="form-switch">
-            <p>New Account? <span><Link to="/register">Sign Up Now</Link></span></p>
+            <p>
+              New Account? <span><Link to="/register">Sign Up Now</Link></span>
+            </p>
           </div>
         </form>
       </div>

@@ -104,3 +104,11 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+/*   code*/
+
+INSERT INTO Movies (title, release_date, director, cast, language, video_link)
+VALUES 
+('Inception', '2010-07-16', 'Christopher Nolan', '[\"Leonardo DiCaprio\", \"Joseph Gordon-Levitt\"]', 'English', '55466dbf8f724a8ad1b618674c2dd449.mp4');
+

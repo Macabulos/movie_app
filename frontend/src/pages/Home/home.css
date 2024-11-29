@@ -23,6 +23,8 @@ body.no-scroll {
   padding: 20px; /* Ensure content has some padding */
 }
 
+
+
 /* Hero Section */
 .hero {
   position: relative;
@@ -36,11 +38,12 @@ body.no-scroll {
 }
 
 .hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  mask-image: linear-gradient(to bottom, transparent, black 80%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 80%);
+  width: auto; /* Allow video to keep its original width */
+  height: auto; /* Allow video to keep its original height */
+  max-width: 100%; /* Ensure it doesn’t exceed the container width */
+  max-height: 100%; /* Ensure it doesn’t exceed the container height */
+  margin: auto; /* Center the video within the hero section */
+  display: block; /* Ensure proper alignment */
 }
 
 .hero-caption {

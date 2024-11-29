@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './register.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [formData, setFormData] = useState({ username: '', email: '', password: '', age: '', gender: '', country: '' });
 
+
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -19,6 +21,7 @@ const Register = () => {
       });
       if (response.ok) {
         alert('Registration successful');
+        navigate('/login');
       } else {
         alert('Registration failed');
       }
@@ -35,9 +38,19 @@ const Register = () => {
           <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
           <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
           <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+          <input type="number" name="age" placeholder="Age" onChange={handleChange} required />
+          <select name="gender" onChange={handleChange} required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="text" name="country" placeholder="Country" onChange={handleChange} required />
           <button type="submit">Sign Up</button>
           <div className="form-switch">
-            <p>Already have an account? <span><Link to="/login">Sign In Now</Link></span></p>
+            <p>
+              Already have an account? <span><Link to="/login">Sign In Now</Link></span>
+            </p>
           </div>
         </form>
       </div>
