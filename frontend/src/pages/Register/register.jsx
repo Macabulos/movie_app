@@ -4,7 +4,7 @@ import './register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', age: '', gender: '', country: '' });
-
+ 
 
   const navigate = useNavigate();
   const handleChange = (e) => {

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './home.css';
 import Navbar from '../../components/Navbar/navbar';
 import Footer from '../../components/Footer/footer';
 
 const Home = () => {
-  const [videos, setVideos] = useState([]); // State to store video data
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
-  const [heroVideo, setHeroVideo] = useState(null); // State for currently displayed hero video
+  const [videos, setVideos] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [heroVideo, setHeroVideo] = useState(null);
 
   useEffect(() => {
-    // Fetch videos from backend API
-    fetch('http://localhost:3001/api/videos') // Ensure backend is running
+    fetch('http://localhost:3001/api/videos')
       .then((response) => response.json())
       .then((data) => {
-        console.log('Videos fetched:', data); // Debug to verify response
+        console.log('Videos fetched:', data);
         setVideos(data);
-        setHeroVideo(data[0]); // Set the first video as the default hero video
+        setHeroVideo(data[0]);
       })
       .catch((error) => console.error('Error fetching videos:', error));
   }, []);
@@ -23,7 +23,7 @@ const Home = () => {
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   const handleVideoClick = (video) => {
-    setHeroVideo(video); // Update the hero video with the clicked video
+    setHeroVideo(video);
   };
 
   return (
@@ -31,10 +31,10 @@ const Home = () => {
       <Navbar />
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <ul className="sidebar-menu">
-          <li><a href="/home">Home</a></li>
-          <li><a href="/categories">Categories</a></li>
-          <li><a href="/favorites">Favorites</a></li>
-          <li><a href="/profile">Profile</a></li>
+          <li><Link to="/home">Home</Link></li>
+          <li><Link to="/categories">Categories</Link></li>
+          <li><Link to="/favorites">Favorites</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
         </ul>
       </div>
 
@@ -66,7 +66,7 @@ const Home = () => {
           <div
             className="card"
             key={index}
-            onClick={() => handleVideoClick(video)} // Set the clicked video as the hero video
+            onClick={() => handleVideoClick(video)}
           >
             <video
               src={video.video_link}
@@ -76,7 +76,7 @@ const Home = () => {
               loop
             />
             <h3>{video.title}</h3>
-            <p>{video.release_date}</p> {/* Display only the release date */}
+            <p>{video.release_date}</p>
           </div>
         ))}
       </div>

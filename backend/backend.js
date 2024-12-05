@@ -35,15 +35,15 @@ db.connect((err) => {
 
 // Register Endpoint
 app.post('/register', async (req, res) => {
-  const { name, email, password, age, gender, country } = req.body; // Include additional user fields
-  if (!name || !email || !password || !age || !gender || !country) {
+  const { username, email, password, age, gender, country } = req.body; // Include additional user fields
+  if (!username || !email || !password || !age || !gender || !country) {
     return res.status(400).send('All fields are required');
   }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const query = 'INSERT INTO users (username, email, password, age, gender, country) VALUES (?, ?, ?, ?, ?, ?)';
-    db.query(query, [name, email, hashedPassword, age, gender, country], (err) => {
+    db.query(query, [username, email, hashedPassword, age, gender, country], (err) => {
       if (err) {
         console.error(err);
         if (err.code === 'ER_DUP_ENTRY') {
