@@ -8,6 +8,8 @@ const Home = () => {
   const [videos, setVideos] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [heroVideo, setHeroVideo] = useState(null);
+  const [favorites, setFavorites] = useState({});
+  const [bookmarks, setBookmarks] = useState({});
 
   useEffect(() => {
     fetch('http://localhost:3001/api/videos')
@@ -24,6 +26,29 @@ const Home = () => {
 
   const handleVideoClick = (video) => {
     setHeroVideo(video);
+  };
+
+  const toggleFavorite = (video) => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const isFavorite = storedFavorites.find((fav) => fav.id === video.id);
+  
+    let updatedFavorites;
+  
+    if (isFavorite) {
+      // Remove from favorites
+      updatedFavorites = storedFavorites.filter((fav) => fav.id !== video.id);
+    } else {
+      // Add to favorites
+      updatedFavorites = [...storedFavorites, video];
+    }
+  
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    setFavorites((prev) => ({ ...prev, [video.id]: !prev[video.id] }));
+  };
+  
+
+  const toggleBookmark = (id) => {
+    setBookmarks((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
@@ -77,6 +102,26 @@ const Home = () => {
             />
             <h3>{video.title}</h3>
             <p>{video.release_date}</p>
+            <div className="icons">
+              <button
+                className={`icon-btn heart ${favorites[video.id] ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleFavorite(video);
+                }}
+              >
+                ♥
+              </button>
+              <button
+                className={`icon-btn bookmark ${bookmarks[video.id] ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleBookmark(video.id);
+                }}
+              >
+                ⚑
+              </button>
+            </div>
           </div>
         ))}
       </div>

@@ -263,3 +263,29 @@ body.no-scroll {
     margin-left: 200px; /* Adjust shift for smaller screens */
   }
 }
+.icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.icon-btn.heart.active {
+  color: red;
+}
+
+.icon-btn.bookmark.active {
+  color: #007bff;
+}
+
+.icon-btn:hover {
+  color: #555;
+}

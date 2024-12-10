@@ -65,32 +65,51 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).send('Email and password are required');
+    return res.status(400).json({ message: 'Email and password are required' });
   }
 
   const query = 'SELECT * FROM users WHERE email = ?';
   db.query(query, [email], async (err, results) => {
     if (err) {
       console.error(err);
-      res.status(500).send('Error logging in');
-    } else if (results.length === 0) {
-      res.status(404).send('User not found');
-    } else {
-      const user = results[0];
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-
-      if (!isPasswordValid) {
-        res.status(401).send('Invalid credentials');
-      } else {
-        const token = jwt.sign({ id: user.user_id }, 'secret_key', { expiresIn: '1h' });
-        res.status(200).json({ token, message: 'Login successful' });
-      }
+      return res.status(500).json({ message: 'Error logging in' });
     }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const user = results[0];
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user.user_id, email: user.email },
+      'secret_key', // Use an environment variable in production
+      { expiresIn: '1h' }
+    );
+
+    // Return token and user details
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: {
+        id: user.user_id,
+        username: user.username,
+        email: user.email,
+      },
+    });
   });
 });
+;
 
 // Video Fetch Endpoint
 // Video Fetch Endpoint
+// Example: Protected route to fetch videos
 app.get('/api/videos', (req, res) => {
   const query = 'SELECT movie_id, title, video_link, release_date FROM movies'; // Fetch relevant columns
   db.query(query, (err, results) => {
@@ -111,19 +130,23 @@ app.get('/api/videos', (req, res) => {
 
 
 
+
 // Middleware for Protected Routes (Token Verification)
 const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization'];
-  if (!token) {
-    return res.status(403).send('Token is required');
+  const authHeader = req.headers['authorization'];
+
+  if (!authHeader) {
+    return res.status(403).json({ message: 'Authorization header is required' });
   }
 
+  const token = authHeader.split(' ')[1]; // Extract the token (format: "Bearer <token>")
+  
   try {
-    const decoded = jwt.verify(token, 'secret_key');
-    req.user = decoded;
-    next();
+    const decoded = jwt.verify(token, 'secret_key'); // Replace 'secret_key' with an environment variable in production
+    req.user = decoded; // Attach user data to the request object
+    next(); // Proceed to the next middleware or route handler
   } catch (err) {
-    res.status(401).send('Invalid or expired token');
+    return res.status(401).json({ message: 'Invalid or expired token' });
   }
 };
 
