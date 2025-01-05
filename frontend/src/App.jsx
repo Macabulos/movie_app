@@ -6,7 +6,7 @@ import Categories from './pages/Category/category'; // Import Categories page
 import Favorites from './pages/Favorites/favorites';   // Import Favorites page
 import Profile from './pages/Profile/profile';         // Import Profile page
 
-function App() {
+function App() { 
   return (
     <div>
       <Routes>
@@ -18,7 +18,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/login" replace />} /> {/* Default route */}
       </Routes>
-    </div>
+    </div> 
   );
 }
 
