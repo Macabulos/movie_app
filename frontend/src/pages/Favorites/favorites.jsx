@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './favorites.css';
 import Navbar from '../../components/Navbar/navbar';
 
 function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const navigate = useNavigate(); // React Router's hook for programmatic navigation
 
   useEffect(() => {
     // Retrieve favorites from localStorage
@@ -36,11 +34,19 @@ function Favorites() {
           <p>No favorites added yet.</p>
         ) : (
           <div className="favorites-list">
-            {favorites.map((video, index) => (
+            {favorites.map((favorite, index) => (
               <div key={index} className="favorite-card">
-                <video src={video.video_link} controls className="video-card" />
-                <h3>{video.title}</h3>
-                <p>{video.release_date}</p>
+                {favorite.video_link ? (
+                  <video
+                    src={favorite.video_link}
+                    controls
+                    className="video-card"
+                  />
+                ) : (
+                  <p>No video available for {favorite.title}.</p>
+                )}
+                <h3>{favorite.title}</h3>
+                <p>{favorite.release_date}</p>
               </div>
             ))}
           </div>

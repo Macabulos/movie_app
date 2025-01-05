@@ -1,0 +1,41 @@
+/* profile.css */
+
+/* General container styling */
+.profile-page {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .profile-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .profile-details {
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .profile-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-details p {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  
+  .profile-details p:last-child {
+    margin-bottom: 0;
+  }
+  

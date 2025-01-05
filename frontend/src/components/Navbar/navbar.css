@@ -23,41 +23,61 @@
     gap: 50px;
 }
 
-.navbar-left img {
-    width: 100px;
-}
-
-.navbar-left ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-left ul li {
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.navbar-left ul li:hover {
-    color: #ffffff;
-}
-
 .navbar-right {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.navbar-right .icons {
-    width: 20px;
-    cursor: pointer;
+/* Search Bar Styles */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
 }
 
-.navbar-right .profile {
+.search-input {
+    padding: 8px;
+    font-size: 14px;
+    color: #e5e5e5;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
-    width: 35px;
+    outline: none;
+    width: 200px;
+    transition: width 0.3s;
+}
+
+.search-input:focus {
+    width: 300px; /* Expands the input on focus */
+    border-color: #ffffff;
+}
+
+.search-button {
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #000000;
+}
+
+.icons {
+    width: 20px;
+    cursor: pointer;
 }
 
 .navbar-profile {
@@ -71,10 +91,6 @@
 .account-text {
     font-weight: bold;
     cursor: pointer;
-}
-
-.navbar-profile img:last-child {
-    width: 10px; 
 }
 
 /* Dropdown styles for logout confirmation */
@@ -123,5 +139,16 @@
 .navbar-profile .dropdown button {
     width: 100%;
 }
+@media (max-width: 768px) {
+    .search-bar {
+        flex: 1;
+    }
 
+    .search-input {
+        width: 150px;
+    }
 
+    .search-input:focus {
+        width: 200px;
+    }
+}

@@ -1,127 +1,101 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './home.css';
 import Navbar from '../../components/Navbar/navbar';
 import Footer from '../../components/Footer/footer';
+import Sidebar from '../../components/Sidebar/sidebar'; // Import Sidebar component
 
 const Home = () => {
-  const [videos, setVideos] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [heroVideo, setHeroVideo] = useState(null);
-  const [favorites, setFavorites] = useState({});
-  const [bookmarks, setBookmarks] = useState({});
+  const [heroMovie, setHeroMovie] = useState(null);
+  const [trailer, setTrailer] = useState(null);
+
+  const API_KEY = '863a66b1b194d42146a0f662ff918286';
+  const TMDB_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/videos')
+    fetch(TMDB_API_URL)
       .then((response) => response.json())
       .then((data) => {
-        console.log('Videos fetched:', data);
-        setVideos(data);
-        setHeroVideo(data[0]);
+        setMovies(data.results);
+        setHeroMovie(data.results[0]);
+        fetchTrailer(data.results[0].id);
       })
-      .catch((error) => console.error('Error fetching videos:', error));
+      .catch((error) => console.error('Error fetching movies:', error));
   }, []);
+
+  const fetchTrailer = (movieId) => {
+    const TRAILER_API_URL = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+    fetch(TRAILER_API_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        const youtubeTrailer = data.results.find((video) => video.site === 'YouTube' && video.type === 'Trailer');
+        if (youtubeTrailer) {
+          setTrailer(`https://www.youtube.com/embed/${youtubeTrailer.key}`);
+        }
+      })
+      .catch((error) => console.error('Error fetching trailer:', error));
+  };
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
-  const handleVideoClick = (video) => {
-    setHeroVideo(video);
+  const handleMovieClick = (movie) => {
+    setHeroMovie(movie);
+    fetchTrailer(movie.id);
   };
 
-  const toggleFavorite = (video) => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    const isFavorite = storedFavorites.find((fav) => fav.id === video.id);
-  
-    let updatedFavorites;
-  
-    if (isFavorite) {
-      // Remove from favorites
-      updatedFavorites = storedFavorites.filter((fav) => fav.id !== video.id);
+  const handleSearchResults = (results) => {
+    if (results.length > 0) {
+      setMovies(results);
+      setHeroMovie(results[0]);
+      fetchTrailer(results[0].id);
     } else {
-      // Add to favorites
-      updatedFavorites = [...storedFavorites, video];
+      setMovies([]);
+      setHeroMovie(null);
+      setTrailer(null);
     }
-  
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    setFavorites((prev) => ({ ...prev, [video.id]: !prev[video.id] }));
-  };
-  
-
-  const toggleBookmark = (id) => {
-    setBookmarks((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
     <div className="home">
-      <Navbar />
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <ul className="sidebar-menu">
-          <li><Link to="/home">Home</Link></li>
-          <li><Link to="/categories">Categories</Link></li>
-          <li><Link to="/favorites">Favorites</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
-        </ul>
-      </div>
-
+      <Navbar onSearch={handleSearchResults} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> {/* Use Sidebar */}
       <button className="hamburger" onClick={toggleSidebar}>☰</button>
 
       <div className="hero">
-        {heroVideo ? (
+        {heroMovie && trailer ? (
           <>
-            <video
-              src={heroVideo.video_link}
-              controls
-              autoPlay
-              muted
-              loop
+            <iframe
+              src={trailer}
+              title={heroMovie.title}
               className="hero-video"
-            />
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             <div className="hero-caption">
-              <h1 className="title">{heroVideo.title || 'Untitled'}</h1>
-              <p>{heroVideo.release_date || 'No release date available.'}</p>
+              <h1 className="title">{heroMovie.title || 'Untitled'}</h1>
+              <p>{heroMovie.release_date || 'No release date available.'}</p>
             </div>
           </>
         ) : (
-          <p>Loading...</p>
+          <p>No movies found.</p>
         )}
       </div>
 
       <div className="more-cards">
-        {videos.map((video, index) => (
+        {movies.map((movie, index) => (
           <div
             className="card"
             key={index}
-            onClick={() => handleVideoClick(video)}
+            onClick={() => handleMovieClick(movie)}
           >
-            <video
-              src={video.video_link}
-              controls
-              className="video-card"
-              muted
-              loop
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              className="movie-poster"
             />
-            <h3>{video.title}</h3>
-            <p>{video.release_date}</p>
-            <div className="icons">
-              <button
-                className={`icon-btn heart ${favorites[video.id] ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFavorite(video);
-                }}
-              >
-                ♥
-              </button>
-              <button
-                className={`icon-btn bookmark ${bookmarks[video.id] ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleBookmark(video.id);
-                }}
-              >
-                ⚑
-              </button>
-            </div>
+            <h3>{movie.title}</h3>
+            <p>{movie.release_date}</p>
           </div>
         ))}
       </div>

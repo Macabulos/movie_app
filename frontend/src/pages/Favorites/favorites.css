@@ -1,56 +1,4 @@
-/* favorites.css */
 
-/* General container styling */
-.favorites-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-    background-color: #000000;
-    
-  }
-  
-  /* Styling for individual favorite cards */
-  .favorite-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #000000;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 300px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .favorite-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Video styling */
-  .video-card {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  /* Title styling */
-  .favorite-card h3 {
-    font-size: 18px;
-    color: #ffffff;
-    margin: 10px 0 5px;
-  }
-  
-  /* Release date styling */
-  .favorite-card p {
-    font-size: 14px;
-    color: #ffffff;
-  }
-  
   /* Empty state styling */
   p {
     font-size: 16px;
@@ -59,3 +7,60 @@
     margin-top: 20px;
   }
   
+  /*  */
+
+  /* General container styling */
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 60px 20px; /* Adjusted padding for better spacing */
+  background-color: #000000;
+  min-height: 100vh; /* Ensures it covers the full screen height */
+}
+
+/* Styling for individual favorite cards */
+.favorite-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1c1c1c; /* Slightly lighter black for better contrast */
+  border: 1px solid #333333; /* Subtle border for definition */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* More prominent shadow for depth */
+  padding: 15px;
+  width: 280px; /* Adjusted width for uniformity */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.2); /* Brighter shadow on hover */
+}
+
+/* Video styling */
+.video-card {
+  width: 100%;
+  height: auto; /* Maintains aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #000; /* Fallback background for video */
+}
+
+/* Title styling */
+.favorite-card h3 {
+  font-size: 18px;
+  color: #ffffff;
+  margin: 10px 0 5px;
+  font-weight: 600; /* Adds emphasis */
+}
+
+/* Release date styling */
+.favorite-card p {
+  font-size: 14px;
+  color: #bbbbbb; /* Slightly muted text color */
+  margin: 0;
+}
+

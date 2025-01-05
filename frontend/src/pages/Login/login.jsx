@@ -21,13 +21,17 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Store token in localStorage
+        localStorage.setItem('token', data.token);
+
         alert('Login successful');
-        navigate('/home'); // Navigate to homepage
+        navigate('/home'); // Navigate to the home page
       } else {
         alert(data.message || 'Login failed');
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
     }
   };
 

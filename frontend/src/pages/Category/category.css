@@ -1,0 +1,69 @@
+/* General container styling for category list */
+/* Body styling */
+
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 280px;
+    background-color: #000000;
+    
+}
+
+/* Styling for individual category cards */
+.category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Title styling */
+.category-card h3 {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 10px 0 5px;
+}
+
+/* Button styling */
+.view-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+/* Link styling inside button */
+.view-button a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Empty state styling */
+p {
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+}
