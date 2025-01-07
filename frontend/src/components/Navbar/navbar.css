@@ -10,27 +10,27 @@
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
     z-index: 1;
     align-items: center;
-}
-
-.movie {
+  }
+  
+  .movie {
     color: red;
     font-size: 2.8rem;
-}
-
-.navbar-left {
+  }
+  
+  .navbar-left {
     display: flex;
     align-items: center;
     gap: 50px;
-}
-
-.navbar-right {
+  }
+  
+  .navbar-right {
     display: flex;
     align-items: center;
     gap: 20px;
-}
-
-/* Search Bar Styles */
-.search-bar {
+  }
+  
+  /* Search Bar Styles */
+  .search-bar {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -38,9 +38,9 @@
     padding: 8px;
     border-radius: 4px;
     backdrop-filter: blur(5px);
-}
-
-.search-input {
+  }
+  
+  .search-input {
     padding: 8px;
     font-size: 14px;
     color: #e5e5e5;
@@ -50,14 +50,14 @@
     outline: none;
     width: 200px;
     transition: width 0.3s;
-}
-
-.search-input:focus {
+  }
+  
+  .search-input:focus {
     width: 300px; /* Expands the input on focus */
     border-color: #ffffff;
-}
-
-.search-button {
+  }
+  
+  .search-button {
     background-color: #ffffff;
     color: white;
     border: none;
@@ -69,32 +69,32 @@
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s;
-}
-
-.search-button:hover {
+  }
+  
+  .search-button:hover {
     background-color: #000000;
-}
-
-.icons {
+  }
+  
+  .icons {
     width: 20px;
     cursor: pointer;
-}
-
-.navbar-profile {
+  }
+  
+  .navbar-profile {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     position: relative;
-}
-
-.account-text {
+  }
+  
+  .account-text {
     font-weight: bold;
     cursor: pointer;
-}
-
-/* Dropdown styles for logout confirmation */
-.navbar .dropdown {
+  }
+  
+  /* Dropdown styles for logout confirmation */
+  .navbar .dropdown {
     position: absolute;
     top: 100%;
     right: 0;
@@ -108,47 +108,153 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0s 0.3s;
-}
-
-.navbar .dropdown p {
+  }
+  
+  .navbar .dropdown p {
     font-size: 13px;
     cursor: pointer;
     margin: 0 0 10px;
-}
-
-.navbar .dropdown button {
+  }
+  
+  .navbar .dropdown button {
     margin-top: 10px;
     padding: 8px;
     cursor: pointer;
     border: none;
     background-color: #f0f0f0;
     border-radius: 4px;
-}
-
-.navbar .dropdown button:hover {
+  }
+  
+  .navbar .dropdown button:hover {
     background-color: #e0e0e0;
-}
-
-.navbar-profile:hover .dropdown {
+  }
+  
+  .navbar-profile:hover .dropdown {
     display: block;
     opacity: 1;
     visibility: visible;
     transition: opacity 0.3s, visibility 0s;
-}
-
-.navbar-profile .dropdown button {
+  }
+  
+  .navbar-profile .dropdown button {
     width: 100%;
-}
-@media (max-width: 768px) {
-    .search-bar {
-        flex: 1;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .navbar {
+      padding: 20px 4%;
     }
-
+  
+    .navbar-left {
+      gap: 30px;
+    }
+  
+    .navbar-right {
+      gap: 15px;
+    }
+  
     .search-input {
-        width: 150px;
+      width: 180px;
     }
-
+  
     .search-input:focus {
-        width: 200px;
+      width: 250px;
     }
-}
+  
+    .search-button {
+      padding: 6px 10px;
+    }
+  
+    .movie {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 15px 3%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-left {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+  
+    .navbar-right {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+  
+    .search-bar {
+      width: 100%;
+    }
+  
+    .search-input {
+      width: 100%;
+    }
+  
+    .search-button {
+      padding: 5px 8px;
+    }
+  
+    .movie {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 10px 2%;
+    }
+  
+    .navbar-left {
+      gap: 20px;
+    }
+  
+    .search-input {
+      font-size: 12px;
+      padding: 6px;
+      width: 160px;
+    }
+  
+    .search-input:focus {
+      width: 220px;
+    }
+  
+    .search-button {
+      padding: 5px 8px;
+    }
+  
+    .movie {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .search-button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .search-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .search-icon {
+    width: 26px;
+    height: 16px;
+    color: #ffffff;
+  }
+  

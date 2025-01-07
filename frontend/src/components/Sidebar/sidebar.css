@@ -1,4 +1,3 @@
-
 /* Sidebar Styles */
 .sidebar {
   position: fixed;
@@ -12,6 +11,7 @@
   transition: left 0.3s ease-in-out;
   z-index: 1000;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  padding-top: 50px; /* To offset the top */
 }
 
 .sidebar.open {
@@ -21,7 +21,7 @@
 .sidebar-menu {
   list-style-type: none;
   padding: 20px 0;
-  margin: 50px;
+  margin: 0;
 }
 
 .sidebar-menu li {
@@ -76,4 +76,59 @@
 /* Adjust Content When Sidebar is Open */
 .sidebar.open ~ .home {
   margin-left: 250px; /* Shift the content to the right */
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px; /* Adjust sidebar width for tablet devices */
+  }
+
+  .hamburger {
+    top: 20px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Make sidebar full-width for small screens */
+    left: -100%; /* Start the sidebar hidden */
+  }
+
+  .sidebar.open {
+    left: 0; /* Open sidebar full-width */
+  }
+
+  .sidebar-menu {
+    padding: 10px;
+  }
+
+  .sidebar-menu li {
+    padding: 12px 18px;
+  }
+
+  .hamburger {
+    left: 10px;
+    top: 10px;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 25px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 80%; /* Slightly narrower sidebar on very small screens */
+    left: -100%; /* Hidden initially */
+  }
+
+  .sidebar.open {
+    left: 0; /* Show sidebar on smaller devices */
+  }
+
+  .hamburger {
+    font-size: 28px; /* Larger hamburger button for mobile */
+  }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './home.css';
 import Navbar from '../../components/Navbar/navbar';
 import Footer from '../../components/Footer/footer';
-import Sidebar from '../../components/Sidebar/sidebar'; // Import Sidebar component
+import Sidebar from '../../components/Sidebar/sidebar';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -11,30 +11,41 @@ const Home = () => {
   const [trailer, setTrailer] = useState(null);
 
   const API_KEY = '863a66b1b194d42146a0f662ff918286';
-  const TMDB_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+ 
 
   useEffect(() => {
-    fetch(TMDB_API_URL)
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies(data.results);
+    const TMDB_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+    fetchMovies(TMDB_API_URL);
+  }, [API_KEY]);
+
+  const fetchMovies = async (url) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setMovies(data.results);
+      if (data.results.length > 0) {
         setHeroMovie(data.results[0]);
         fetchTrailer(data.results[0].id);
-      })
-      .catch((error) => console.error('Error fetching movies:', error));
-  }, []);
+      }
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
 
-  const fetchTrailer = (movieId) => {
-    const TRAILER_API_URL = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
-    fetch(TRAILER_API_URL)
-      .then((response) => response.json())
-      .then((data) => {
-        const youtubeTrailer = data.results.find((video) => video.site === 'YouTube' && video.type === 'Trailer');
-        if (youtubeTrailer) {
-          setTrailer(`https://www.youtube.com/embed/${youtubeTrailer.key}`);
-        }
-      })
-      .catch((error) => console.error('Error fetching trailer:', error));
+  const fetchTrailer = async (movieId) => {
+    try {
+      const TRAILER_API_URL = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+      const response = await fetch(TRAILER_API_URL);
+      const data = await response.json();
+      const youtubeTrailer = data.results.find(
+        (video) => video.site === 'YouTube' && video.type === 'Trailer'
+      );
+      if (youtubeTrailer) {
+        setTrailer(`https://www.youtube.com/embed/${youtubeTrailer.key}`);
+      }
+    } catch (error) {
+      console.error('Error fetching trailer:', error);
+    }
   };
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
@@ -59,8 +70,10 @@ const Home = () => {
   return (
     <div className="home">
       <Navbar onSearch={handleSearchResults} />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> {/* Use Sidebar */}
-      <button className="hamburger" onClick={toggleSidebar}>☰</button>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <button className="hamburger" onClick={toggleSidebar}>
+        ☰
+      </button>
 
       <div className="hero">
         {heroMovie && trailer ? (

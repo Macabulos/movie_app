@@ -27,6 +27,7 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('padla may sayop');
     }
   };
 

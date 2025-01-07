@@ -2,8 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/login';
 import Register from './pages/Register/register';
 import Home from './pages/Home/home';
-import Categories from './pages/Category/category'; // Import Categories page
-import GenreMovies from './pages/GenreMovies/genre'; // Import GenreMovies page
+import Categories from './pages/Category/Category'; // Import Categories page
+import GenreMovies from './pages/GenreMovies/GenreMovies'; // Import GenreMovies page
 import Favorites from './pages/Favorites/favorites';   // Import Favorites page
 import Profile from './pages/Profile/profile';         // Import Profile page
 
@@ -15,7 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/categories/:genreId" element={<GenreMovies />} /> {/* New GenreMovies route */}
+        <Route path="/category/:genreId" element={<GenreMovies />} /> {/* New GenreMovies route */}
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/login" replace />} /> {/* Default route */}

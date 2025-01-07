@@ -1,0 +1,84 @@
+.genre-movies-page {
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 100%; /* Default to full width */
+  max-width: 250px; /* Limit the width */
+  background: #191919;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.movie-card h3 {
+  color: white;
+  font-size: 18px;
+}
+
+.movie-card p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+button {
+  background-color: #ff1e29; /* Bright blue for the default state */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button a {
+  text-decoration: none;
+  color: white;
+}
+
+button:hover {
+  background-color: #000000; /* Darker blue for hover state */
+  transform: scale(1.05); /* Slight zoom-in effect on hover */
+}
+
+button:active {
+  background-color: #ffffff; /* Even darker blue for active state */
+  transform: scale(0.98); /* Slight zoom-out effect on click */
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .movie-card {
+    width: 45%; /* 2 columns on tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  .movie-card {
+    width: 30%; /* 3 columns on desktops */
+  }
+}
+
+@media (min-width: 1440px) {
+  .movie-card {
+    width: 22%; /* 4 columns on larger screens */
+  }
+}

@@ -1,69 +1,102 @@
 /* General container styling for category list */
-/* Body styling */
-
-.categories-list {
+.category-page {
+    background-color: #000000;
+    min-height: 100vh;
+    padding: 80px 20px; /* Adjust padding for responsiveness */
+    color: #ffffff;
+  }
+  
+  .categories-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    padding: 280px;
-    background-color: #000000;
-    
-}
-
-/* Styling for individual category cards */
-.category-card {
+    margin-top: 20px; /* Adjust spacing above the categories */
+    padding: 0 10px; /* Add padding for small screens */
+  }
+  
+  /* Styling for individual category cards */
+  .category-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #000000;
-    border: 1px solid #000000;
+    background-color: #1c1c1c; /* Slightly lighter shade for contrast */
+    border: 1px solid #333333; /* Subtle border for definition */
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust shadow for depth */
     padding: 15px;
-    width: 300px;
+    width: 250px; /* Adjust card size for responsiveness */
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Title styling */
-.category-card h3 {
-    font-size: 18px;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Title styling */
+  .category-card h3 {
+    font-size: 20px;
     color: #ffffff;
-    margin: 10px 0 5px;
-}
-
-/* Button styling */
-.view-button {
-    background-color: #007bff;
+    margin: 15px 0;
+  }
+  
+  /* Button styling */
+  .view-button {
+    background-color: #1e90ff;
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
     text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.view-button:hover {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .view-button:hover {
     background-color: #0056b3;
-}
-
-/* Link styling inside button */
-.view-button a {
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+  
+  .view-button:active {
+    background-color: #003d80;
+    transform: scale(0.98); /* Slight shrink on click */
+  }
+  
+  /* Link styling inside button */
+  .view-button a {
     color: #ffffff;
     text-decoration: none;
-}
-
-/* Empty state styling */
-p {
+    display: inline-block;
+  }
+  
+  /* Empty state styling */
+  p {
     font-size: 16px;
     color: #ffffff;
     text-align: center;
     margin-top: 20px;
-}
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .category-card {
+      width: 100%; /* Full width for smaller screens */
+      max-width: 300px; /* Prevent cards from becoming too large */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .categories-list {
+      gap: 10px; /* Adjust gap for smaller screens */
+    }
+  
+    .view-button {
+      font-size: 12px; /* Adjust button size for smaller screens */
+      padding: 8px 12px;
+    }
+  }
+  

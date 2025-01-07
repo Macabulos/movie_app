@@ -20,33 +20,29 @@ body.no-scroll {
   flex-direction: column;
   align-items: center;
   transition: margin-left 0.3s ease-in-out; /* Smooth transition for sidebar toggle */
-  padding: 20px; /* Ensure content has some padding */
+  padding: 20px;
 }
-
-
 
 /* Hero Section */
 .hero {
   position: relative;
   width: 100%;
-  height: 60vh; /* Adjust as needed */
+  height: 60vh;
   display: flex;
-  align-items: center; /* Center align the content */
-  justify-content: center; /* Center the video */
+  align-items: center;
+  justify-content: center;
   background-color: #000;
-  overflow: hidden; /* Hide any overflow from the video */
+  overflow: hidden;
 }
-
 
 .hero-video {
-  width: 100%; /* Make the video stretch to the full width of the container */
-  height: 100%; /* Make the video fill the container's height */
-  object-fit: cover; /* Ensure the video covers the area without distortion */
-  max-width: 100%; /* Prevent the video from exceeding the container's width */
-  max-height: 100%; /* Prevent the video from exceeding the container's height */
-  display: block; /* Ensure proper alignment */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
-
 
 .hero-caption {
   position: absolute;
@@ -54,6 +50,7 @@ body.no-scroll {
   left: 5%;
   z-index: 2;
   max-width: 600px;
+  text-align: left;
 }
 
 .title {
@@ -66,43 +63,6 @@ body.no-scroll {
   font-size: 1rem;
   margin-bottom: 20px;
   color: #ddd;
-}
-
-.hero-btns {
-  display: flex;
-  gap: 15px;
-}
-
-.hero-btns .btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.hero-btns .btn img {
-  width: 20px;
-}
-
-.hero-btns .btn:hover {
-  background-color: #e50914;
-  color: #fff;
-  transform: scale(1.05);
-}
-
-.hero-btns .btn.dark-btn {
-  background-color: #333;
-  color: #fff;
-}
-
-.hero-btns .btn.dark-btn:hover {
-  background-color: #444;
 }
 
 /* More Cards Section */
@@ -125,32 +85,52 @@ body.no-scroll {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.video-card {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
+.card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 .card p {
   margin: 10px 0;
   font-size: 1rem;
+  color: #aaa;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
   color: #fff;
+  cursor: pointer;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero {
     height: 50vh;
   }
 
   .hero-caption {
-    bottom: 10px;
+    bottom: 15px;
     left: 3%;
+    text-align: center;
   }
 
   .title {
@@ -161,9 +141,36 @@ body.no-scroll {
     font-size: 0.9rem;
   }
 
-  .hero-btns .btn {
-    font-size: 0.9rem;
-    padding: 8px 15px;
+  .more-cards {
+    gap: 15px;
+  }
+
+  .card {
+    width: 200px;
+  }
+
+  .card img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 40vh;
+  }
+
+  .hero-caption {
+    bottom: 10px;
+    left: 2%;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .hero-caption p {
+    font-size: 0.8rem;
   }
 
   .more-cards {
@@ -171,45 +178,57 @@ body.no-scroll {
   }
 
   .card {
-    width: 90%;
+    width: 150px;
   }
 
-  .video-card {
-    height: 120px;
+  .card img {
+    height: 250px;
   }
 
-  .sidebar {
-    width: 200px;
-  }
-
-  .sidebar.open ~ .home {
-    margin-left: 200px; /* Adjust shift for smaller screens */
+  .hamburger {
+    font-size: 1.2rem;
   }
 }
-.icons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
+
+@media (max-width: 480px) {
+  .hero {
+    height: 30vh;
+  }
+
+  .hero-caption {
+    bottom: 5px;
+    left: 2%;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .hero-caption p {
+    font-size: 0.7rem;
+  }
+
+  .more-cards {
+    gap: 5px;
+  }
+
+  .card {
+    width: 120px;
+  }
+
+  .card img {
+    height: 200px;
+  }
+
+  .hamburger {
+    font-size: 1rem;
+  }
 }
 
-.icon-btn {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #888;
-  transition: color 0.3s;
+/* Footer */
+footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.9rem;
 }
-
-.icon-btn.heart.active {
-  color: red;
-}
-
-.icon-btn.bookmark.active {
-  color: #007bff;
-}
-
-.icon-btn:hover {
-  color: #555;
-}
-

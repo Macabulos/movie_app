@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './navbar.css';
-// import bell_icon from '../../assets/bell_icon.svg';
 
 const Navbar = ({ onSearch }) => {
-  const navigate = useNavigate(); // Initialize the useNavigate hook
-  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false); // State to control the visibility of the logout confirmation
-  const [searchQuery, setSearchQuery] = useState(''); // State to store the search query
+  const navigate = useNavigate();
+  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleLogout = () => {
-    // Clear any authentication-related data (e.g., token)
-    localStorage.removeItem('authToken'); // Assuming the token is stored in localStorage
-
-    // Redirect to the login page
-    navigate('/login'); // Update this path according to your app's routing structure
+    localStorage.removeItem('authToken');
+    navigate('/login');
   };
 
   const toggleLogoutConfirmation = () => {
-    setShowLogoutConfirmation(!showLogoutConfirmation); // Toggle confirmation visibility
+    setShowLogoutConfirmation(!showLogoutConfirmation);
   };
 
   const handleSearch = () => {
@@ -29,7 +25,7 @@ const Navbar = ({ onSearch }) => {
         .then((response) => response.json())
         .then((data) => {
           if (onSearch) {
-            onSearch(data.results); // Pass the search results to the parent component
+            onSearch(data.results);
           }
         })
         .catch((error) => console.error('Error fetching search results:', error));
@@ -55,9 +51,19 @@ const Navbar = ({ onSearch }) => {
             onChange={handleSearchInputChange}
             className="search-input"
           />
-          <button onClick={handleSearch} className="search-button">🔍</button>
+          <button onClick={handleSearch} className="search-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+              className="search-icon"
+            >
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1.007 1.007 0 0 0-.115-.098zm-5.241.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" />
+            </svg>
+          </button>
         </div>
-        {/* <img src={bell_icon} alt="Notifications" className="icons" /> */}
 
         <div className="navbar-profile">
           <span className="account-text" onClick={toggleLogoutConfirmation}>Log Out</span>
