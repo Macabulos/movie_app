@@ -10,7 +10,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <li><Link to="/home">Home</Link></li>
           <li><Link to="/categories">Categories</Link></li>
           {/* <li><Link to="/favorites">Favorites</Link></li> */}
-          <li><Link to="/profile">Profile</Link></li>
+          {/* <li><Link to="/profile">Profile</Link></li> */}
         </ul>
       </div>
 

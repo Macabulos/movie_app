@@ -46,6 +46,9 @@
     color: rgba(255, 255, 255, 0.7);
   }
   
+  .register-form  select option{
+    color: black;
+  }
   .register-form button {
     width: 100%;
     height: 50px;

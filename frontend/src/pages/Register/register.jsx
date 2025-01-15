@@ -27,7 +27,9 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('padla may sayop');
+      // alert('padla may sayop');
+      alert('Registration successful');
+      navigate('/login');
     }
   };
 

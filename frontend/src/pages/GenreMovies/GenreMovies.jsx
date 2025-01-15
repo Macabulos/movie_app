@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '../../components/Navbar/navbar';
+import Navbar2 from '../../components/Navbar2/navbar2';
 import Footer from '../../components/Footer/footer';
 import Sidebar from '../../components/Sidebar/sidebar';
 import './genre.css';
@@ -43,7 +43,7 @@ function GenreMovies() {
 
   return (
     <div className="genre-movies-page">
-       <Navbar />
+       <Navbar2 />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> {/* Use Sidebar */}
       <button className="hamburger" onClick={toggleSidebar}>☰</button>
       <div className="movies-list">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './category.css';
-import Navbar from '../../components/Navbar/navbar';
+import Navbar2 from '../../components/Navbar2/navbar2';
 import Sidebar from '../../components/Sidebar/sidebar'; // Import Sidebar component
 
 const API_KEY = '863a66b1b194d42146a0f662ff918286';
@@ -27,7 +27,7 @@ function Category() {
 
   return (
     <div className="category-page">
-      <Navbar />
+      <Navbar2 />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> {/* Use Sidebar */}
       <button className="hamburger" onClick={toggleSidebar}>☰</button>
 
